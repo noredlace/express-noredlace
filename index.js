@@ -51,10 +51,11 @@ app.get('/api/wakfu/professions', async (req, res) => {
 });
 
 app.get('/api/wakfu/profession/:ProfessionName', async (req, res) => {
-	var professionName = req.params.ProfessionName
-	var professionFolder = './WakfuRecipes/'
-	var professionFileName = professionName + ".json"
-	var professionFilePath = professionFolder + professionFileName
+	var professionName = req.params.ProfessionName;
+	professionName = professionName.toLocaleLowerCase();
+	var professionFolder = './WakfuRecipes/';
+	var professionFileName = professionName + ".json";
+	var professionFilePath = professionFolder + professionFileName;
 
 	try {
 		var recipeJson = fs.readFileSync(professionFilePath, 'utf-8');
