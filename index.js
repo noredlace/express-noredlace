@@ -15,28 +15,36 @@ Sample Joke of the Day Call
 */
 
 app.get('/api/jokes/jod', async (req, res) => {
-	const api_url = 'https://api.jokes.one/jod';
-	const fetch_response = await fetch(api_url);
-	const json = await fetch_response.json();
-	res.json(json);
+	try {
+		const api_url = 'https://api.jokes.one/jod';
+		const fetch_response = await fetch(api_url);
+		const json = await fetch_response.json();
+		res.json(json);
+	} catch (error) {
+		res.json('{"Error": "' + error + '"}');
+	}
+
 });
 
 /*
 WAKFU API
 */
 
-app.get('/api/wakfu/professions', async (req,res) => {
+app.get('/api/wakfu/professions', async (req, res) => {
 
 	try {
 		professionList = []
 
 		var professionsFolder = './WakfuRecipes/'
 		fs.readdirSync(professionsFolder).forEach(file => {
-			professionObject = new Object();
-			professionObject.profession = file.replace('.json','');
-			professionObject.modifiedDate = fs.statSync(professionsFolder+file).ctime.toDateString();
-			professionList.push(professionObject);
-		  });
+			if (file != "README.md")
+			{
+				professionObject = new Object();
+				professionObject.Profession = file.replace('.json', '');
+				professionObject.ModifiedDate = fs.statSync(professionsFolder + file).ctime.toDateString();
+				professionList.push(professionObject);
+			}
+		});
 
 		res.json(professionList);
 	} catch (error) {
@@ -45,11 +53,12 @@ app.get('/api/wakfu/professions', async (req,res) => {
 
 });
 
-app.get('/api/wakfu/profession/:ProfessionName', async (req,res) => {
-	var professionName = req.params.ProfessionName
-	var professionFolder = './WakfuRecipes/'
-	var professionFileName = professionName + ".json"
-	var professionFilePath = professionFolder + professionFileName
+app.get('/api/wakfu/profession/:ProfessionName', async (req, res) => {
+	var professionName = req.params.ProfessionName;
+	professionName = professionName.toLocaleLowerCase();
+	var professionFolder = './WakfuRecipes/';
+	var professionFileName = professionName + ".json";
+	var professionFilePath = professionFolder + professionFileName;
 
 	try {
 		var recipeJson = fs.readFileSync(professionFilePath, 'utf-8');
