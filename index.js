@@ -69,6 +69,23 @@ app.get('/api/wakfu/profession/:ProfessionName', async (req, res) => {
 	}
 });
 
+/*
+WAKFU API V2
+*/
+
+app.get('/api/wakfu/recipes', async (req, res) => {
+	var recipesFilePath = './wakfu/recipes.json';
+
+	try {
+		var recipeJson = fs.readFileSync(recipesFilePath, 'utf-8');
+
+		res.json(JSON.parse(recipeJson));
+	} catch (error) {
+		res.json('{"Error": "' + error + '"}');
+	}
+});
+
+
 // PORT
 // Default to 3000. Docker should allow customizing the Port of the Docker Container (3000) -> Docker Host (AnyPort)
 const PORT = 3000;
