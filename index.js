@@ -37,10 +37,13 @@ app.get('/api/wakfu/professions', async (req, res) => {
 
 		var professionsFolder = './WakfuRecipes/'
 		fs.readdirSync(professionsFolder).forEach(file => {
-			professionObject = new Object();
-			professionObject.Profession = file.replace('.json', '');
-			professionObject.ModifiedDate = fs.statSync(professionsFolder + file).ctime.toDateString();
-			professionList.push(professionObject);
+			if (file != "README.md")
+			{
+				professionObject = new Object();
+				professionObject.Profession = file.replace('.json', '');
+				professionObject.ModifiedDate = fs.statSync(professionsFolder + file).ctime.toDateString();
+				professionList.push(professionObject);
+			}
 		});
 
 		res.json(professionList);
