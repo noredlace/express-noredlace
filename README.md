@@ -1,11 +1,9 @@
 # express-noredlace
 backend api site for my repo sites written in express.js
 
-## Sample Get Requests
+## Sample Get Request
 
-[ProfessionsAPI Sample](https://express.noredlace.com/api/wakfu/professions)
-
-[ChefRecipesAPI Sample](https://express.noredlace.com/api/wakfu/profession/chef)
+[Recipes](https://express.noredlace.com/api/wakfu/recipes)
 
 ## Docker
 
