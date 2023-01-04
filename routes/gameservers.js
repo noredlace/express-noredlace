@@ -2,7 +2,7 @@ const express = require('express');
 router = express.Router();
 
 
-var dummyServer = require('../config/gameservers/gameservers.json')
+var dummyServer = require('../configs/gameservers/gameservers.json')
 
 // Define the home page route
 router.get('/', function (req, res) {

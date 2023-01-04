@@ -1,7 +1,7 @@
 const express = require('express');
 router = express.Router();
 
-var recipeFilePath = require('../config/wakfu/recipes.json')
+var recipeFilePath = require('../configs/wakfu/recipes.json')
 
 // Define the home page route
 router.get('/', function (req, res) {
